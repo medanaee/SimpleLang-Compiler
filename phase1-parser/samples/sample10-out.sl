@@ -1,0 +1,1 @@
+Line: 1 | Name: fib_demo | Number of ports: 0 | Number of component items: 7 | Number of repeat loops: 4

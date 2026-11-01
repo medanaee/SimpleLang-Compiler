@@ -1,0 +1,10 @@
+package main.ast.nodes.ComponentItem;
+
+import main.ast.nodes.Node;
+import main.visitor.IVisitor;
+
+public abstract class GenerateBlock extends ComponentItemDeclaration {
+
+    public GenerateBlock() {
+    }
+}

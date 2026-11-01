@@ -1,0 +1,209 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: test1
+      id: test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test1
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample1.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line: 1 | Name: counter_bank | Number of ports: 0 | Number
+          of component items: 10 | Number of repeat loops: 6'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test2
+      id: test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test2
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample2.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line: 1 | Name: matrix_multiplication | Number of ports:
+          0 | Number of component items: 14 | Number of repeat loops: 5'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test3
+      id: test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test3
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample3.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line: 1 | Name: fifo_demo | Number of ports: 0 | Number
+          of component items: 26 | Number of repeat loops: 14'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test4
+      id: test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test4
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample4.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line: 1 | Name: Incrementer | Number of ports: 2 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 8 | Name: Multiplier | Number of ports: 3 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 16 | Name: Top_Basic | Number of ports: 3 | Number of component items: 7 | Number of repeat loops: 4
+          Line: 23 | ComponentType: Incrementer | Instances: u_inc | Number of ports: 2
+          Line: 28 | ComponentType: Multiplier | Instances: u_mul | Number of ports: 3
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test5
+      id: test5
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test5
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample5.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line: 1 | Name: ternary_demo | Number of ports: 0 | Number
+          of component items: 9 | Number of repeat loops: 5'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test6
+      id: test6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test6
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample6.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line: 1 | Name: Incrementer | Number of ports: 2 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 8 | Name: Multiplier | Number of ports: 3 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 16 | Name: Top_Basic | Number of ports: 3 | Number of component items: 7 | Number of repeat loops: 4
+          Line: 23 | ComponentType: Incrementer | Instances: u_inc | Number of ports: 2
+          Line: 28 | ComponentType: Multiplier | Instances: u_mul | Number of ports: 3
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test7
+      id: test7
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test7
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample7.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line: 1 | Name: FullAdder | Number of ports: 5 | Number of component items: 2 | Number of repeat loops: 0
+          Line: 12 | Name: AdderN | Number of ports: 5 | Number of component items: 5 | Number of repeat loops: 0
+          Line: 25 | Name: GEN_FA | Number of statements : 1
+          Line: 26 | ComponentType: FullAdder | Instances: fa | Number of ports: 5
+          Line: 37 | Name: Top_ParametricAdder | Number of ports: 3 | Number of component items: 4 | Number of repeat loops: 0
+          Line: 45 | ComponentType: AdderN | Instances: u_add8 | Number of ports: 5
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test8
+      id: test8
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test8
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample8.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line: 3 | Name: BUFG | Number of ports: 2 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 7 | Name: Top_TimerBuf | Number of ports: 2 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 8 | ComponentType: BUFG | Instances: u | Number of ports: 2
+          Line: 11 | Name: Scenario | Number of ports: 0 | Number of component items: 8 | Number of repeat loops: 4
+          Line: 15 | ComponentType: Top_TimerBuf | Instances: u0 | Number of ports: 2
+          Line: 16 | ComponentType: Top_TimerBuf | Instances: u1 | Number of ports: 2
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test9
+      id: test9
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test9
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample9.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line: 3 | Name: FDRE | Number of ports: 5 | Number of component items: 0 | Number of repeat loops: 0
+          Line: 8 | Name: BUFG | Number of ports: 2 | Number of component items: 1 | Number of repeat loops: 0
+          Line: 12 | Name: CounterN | Number of ports: 3 | Number of component items: 5 | Number of repeat loops: 0
+          Line: 22 | Name: G | Number of statements : 1
+          Line: 23 | ComponentType: FDRE | Instances: ff | Number of ports: 5
+          Line: 30 | Name: Top_Counters | Number of ports: 5 | Number of component items: 5 | Number of repeat loops: 0
+          Line: 38 | ComponentType: BUFG | Instances: b0 | Number of ports: 2
+          Line: 39 | ComponentType: BUFG | Instances: b1 | Number of ports: 2
+          Line: 40 | ComponentType: CounterN | Instances: u0 | Number of ports: 3
+          Line: 41 | ComponentType: CounterN | Instances: u1 | Number of ports: 3
+          Line: 44 | Name: Scenario | Number of ports: 0 | Number of component items: 9 | Number of repeat loops: 6
+          Line: 48 | ComponentType: Top_Counters | Instances: dut | Number of ports: 5
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test10
+      id: test10
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test10
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/sample10.sl" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line: 1 | Name: fib_demo | Number of ports: 0 | Number of
+          component items: 7 | Number of repeat loops: 4'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST1_RESULTS: "${{steps.test1.outputs.result}}"
+        TEST2_RESULTS: "${{steps.test2.outputs.result}}"
+        TEST3_RESULTS: "${{steps.test3.outputs.result}}"
+        TEST4_RESULTS: "${{steps.test4.outputs.result}}"
+        TEST5_RESULTS: "${{steps.test5.outputs.result}}"
+        TEST6_RESULTS: "${{steps.test6.outputs.result}}"
+        TEST7_RESULTS: "${{steps.test7.outputs.result}}"
+        TEST8_RESULTS: "${{steps.test8.outputs.result}}"
+        TEST9_RESULTS: "${{steps.test9.outputs.result}}"
+        TEST10_RESULTS: "${{steps.test10.outputs.result}}"
+      with:
+        runners: test1,test2,test3,test4,test5,test6,test7,test8,test9,test10

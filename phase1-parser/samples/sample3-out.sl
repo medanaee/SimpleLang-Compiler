@@ -1,0 +1,1 @@
+Line: 1 | Name: fifo_demo | Number of ports: 0 | Number of component items: 26 | Number of repeat loops: 14

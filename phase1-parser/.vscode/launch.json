@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        
+        {
+            "name": "Debug ANTLR4 grammar",
+            "type": "antlr-debug",
+            "request": "launch",
+            "input": "./samples/sample11.sl", 
+            "grammar": "./src/main/grammar/SimpleLangParser.g4",
+            "startRule": "source_text",
+            "printParseTree": true,
+            "visualParseTree": true
+        },
+
+        {
+            "name": "run quick test",
+            "type": "antlr-debug",
+            "request": "launch",
+            "input": "./samples/test.sl", 
+            "grammar": "./src/main/grammar/SimpleLang.g4",
+            "startRule": "source_text",
+            "printParseTree": true,
+            "visualParseTree": true
+        },
+
+        {
+            "type": "java",             
+            "name": "Run SimpleLang",   
+            "request": "launch",        
+            "mainClass": "SimpleLang",              
+            "args": ["./samples/sample9.sl"]          
+        },
+    ]
+}

@@ -1,0 +1,1 @@
+Line: 1 | name: counter_bank | Number of ports: 0 | Number of component items: 10 | Number of repeat loops: 6

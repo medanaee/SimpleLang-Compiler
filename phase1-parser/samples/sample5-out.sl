@@ -1,0 +1,1 @@
+Line: 1 | Name: ternary_demo | Number of ports: 0 | Number of component items: 9 | Number of repeat loops: 5

@@ -1,0 +1,19 @@
+{
+    "java.project.referencedLibraries": [
+        "utilities/antlr-4.13.1-complete.jar",
+        "utilities/jackson-databind-2.17.0.jar",
+        "utilities/jackson-core-2.17.0.jar",
+        "utilities/jackson-annotations-2.17.0.jar"
+    ],
+    "java.project.sourcePaths": [
+        "src",
+        "generated-sources"
+    ],
+    "antlr4.generation": {
+        "mode": "external",
+        "language": "Java",
+        "listeners": true,
+        "visitors": true,
+        "alternativeJar": "../../../utilities/antlr-4.13.1-complete.jar"
+    }
+}

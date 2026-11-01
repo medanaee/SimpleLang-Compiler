@@ -1,0 +1,148 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Test1
+      id: test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test1
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/1-undeclared_variable.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line 3: y is undeclared variable'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test2
+      id: test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test2
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/2-undeclared_instantiate.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line 5: there is no any NoSuchComponent component'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test3
+      id: test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test3
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/3-uninitialized_variable.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line 5: x is uninitialized variable'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test4
+      id: test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test4
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/4-multiple_repeat.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line 5: x has nondeterministic value at time 1'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test5
+      id: test5
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test5
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/5-argument_mismatch.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line 14: argument mismatch for u0
+          Line 15: argument mismatch for u1
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test6
+      id: test6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test6
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/6-type_error_1.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line 8: type mismatch'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test7
+      id: test7
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test7
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/7-type_error_2.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: |-
+          Line 6: type mismatch
+          Line 9: type mismatch
+          Line 11: type mismatch
+          Line 13: type mismatch
+          Line 15: type mismatch
+          Line 17: type mismatch
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Test8
+      id: test8
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Test8
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src gen
+          -name "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar SimpleLang
+          "samples/8-type_error_3.cs" | sort -t':' -k1.6n -k2
+        input: ''
+        expected-output: 'Line 9: type mismatch'
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST1_RESULTS: "${{steps.test1.outputs.result}}"
+        TEST2_RESULTS: "${{steps.test2.outputs.result}}"
+        TEST3_RESULTS: "${{steps.test3.outputs.result}}"
+        TEST4_RESULTS: "${{steps.test4.outputs.result}}"
+        TEST5_RESULTS: "${{steps.test5.outputs.result}}"
+        TEST6_RESULTS: "${{steps.test6.outputs.result}}"
+        TEST7_RESULTS: "${{steps.test7.outputs.result}}"
+        TEST8_RESULTS: "${{steps.test8.outputs.result}}"
+      with:
+        runners: test1,test2,test3,test4,test5,test6,test7,test8
